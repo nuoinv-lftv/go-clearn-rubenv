@@ -1,0 +1,32 @@
+# development:
+#     dialect: mysql
+#     datasource: host=127.0.0.1 dbname=rubenv_development user=${DB_USER} password=${DB_PASSWORD} sslmode=required
+#     table: db/migrations
+#     dir: db/migrations
+# test:
+#     dialect: mysql
+#     datasource: host=127.0.0.1 dbname=rubenv_test user=${DB_USER} password=${DB_PASSWORD} sslmode=required
+#     dir: db/migrations
+#     table: migrations
+# production:
+#     dialect: mysql
+#     datasource: host=127.0.0.1:3306 dbname=rubenv_production user=${DB_USER} password=${DB_PASSWORD} sslmode=required
+#     dir: db/migrations
+#     table: migrations
+
+# development:
+#     driver: mysql
+#     open: root:@tcp(127.0.0.1:3306)/rubenv_development
+
+development:
+    dialect: mysql
+    # datasource: host=127.0.0.1:3306 dbname=rubenv_development user=root password= sslmode=required
+    datasource: root:@tcp(127.0.0.1:3306)/rubenv_development?parseTime=true
+    # datasource: root:@tcp(127.0.0.1:3306)/golang-clean-architecture?parseTime=true
+    table: migrations
+    dir: migrations
+# test:
+#     dialect: mysql
+#     datasource: host=127.0.0.1:3306 dbname=rubenv_test user=root password= sslmode=required
+#     table: migrations
+#     dir: migrations

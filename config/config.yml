@@ -1,0 +1,12 @@
+database:
+    user: root
+    password:
+    net: tcp
+    addr: 127.0.0.1:3306
+    dbname: rubenv_development
+    allowNativePasswords: true
+    params:
+      parseTime: "true"
+  
+server:
+    address: 3000
