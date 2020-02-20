@@ -12,9 +12,8 @@ type userInteractor struct {
 // UserInteractor ...
 type UserInteractor interface {
 	GetAll() ([]*model.User, error)
-	// Add(data model.User) (err error)
-	// Users() (users []model.User, err error)
-	// UserById(id int) (user model.User, err error)
+	AddUser(data model.User) (user model.User, err error)
+	UserById(id int) (user model.User, err error)
 }
 
 // NewUserInteractor ...
@@ -34,4 +33,22 @@ func (us *userInteractor) GetAll() (u []*model.User, err error) {
 
 	// return us.pres.ResponseUsers(u), nil // c1
 	return u, nil
+}
+
+// AddUser ...
+func (interactor *userInteractor) AddUser(data model.User) (user model.User, err error) {
+	user, err = interactor.User.Store(data)
+	if err != nil {
+		return model.User{}, err
+	}
+	return user, err
+}
+
+// UserById ...
+func (interactor *userInteractor) UserById(id int) (user model.User, err error) {
+	user, err = interactor.User.FindById(id)
+	if err != nil {
+		return model.User{}, err
+	}
+	return user, nil
 }
