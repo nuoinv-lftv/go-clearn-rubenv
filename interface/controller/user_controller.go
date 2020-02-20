@@ -10,7 +10,7 @@ import (
 )
 
 type userController struct {
-	Interactor usecase.UserInteractor
+	usecase usecase.UserInteractor
 }
 
 // UserController ..
@@ -26,7 +26,7 @@ func NewUserController(us usecase.UserInteractor) UserController {
 func (uc *userController) GetUsers(c Context) error {
 	// var u []*model.User
 
-	u, err := uc.Interactor.Get()
+	u, err := uc.usecase.GetAll()
 	// u, err := uc.userInteractor.Get(u)
 	if err != nil {
 		return err
@@ -35,5 +35,4 @@ func (uc *userController) GetUsers(c Context) error {
 	// res := Response{Message: u}
 
 	return c.JSON(http.StatusOK, u)
-	// return "Hello, World!"
 }

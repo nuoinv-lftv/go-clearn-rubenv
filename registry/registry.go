@@ -23,18 +23,3 @@ func NewRegistry(db *gorm.DB) Registry {
 func (r *registry) NewAppController() controller.AppController {
 	return r.NewUserController()
 }
-
-// // NewUserController ..
-// func (i *registry) NewUserController() controller.AppController {
-// 	return controller.NewUserController(i.NewUserInteractor())
-// }
-
-// // NewUserInteractor ..
-// func (i *registry) NewUserInteractor() usecase.UserInteractor {
-// 	return usecase.NewUserInteractor(i.NewUsersRepository())
-// }
-
-// // NewUsersRepository ..
-// func (i *registry) NewUsersRepository() usecase.UserRepository {
-// 	return usecase.NewUserRepository(i.db)
-// }

@@ -25,12 +25,11 @@ func main() {
 	ctrl := r.NewAppController()
 
 	e := echo.New()
+
 	// debug mode
 	e.Debug = true
 
 	e = router.NewRouter(e, ctrl)
-
-	// r.Run(":8080")
 
 	fmt.Println("Server listen at http://localhost" + ":" + config.C.Server.Address)
 	if err := e.Start(":" + config.C.Server.Address); err != nil {
