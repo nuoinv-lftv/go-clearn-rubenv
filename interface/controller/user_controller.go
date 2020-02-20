@@ -4,8 +4,9 @@ import (
 
 	// "github.com/gin-gonic/gin"
 
-	"net/http"
+	"strconv"
 
+	"github.com/nuoinguyen/gin-rubenv/domain/model"
 	"github.com/nuoinguyen/gin-rubenv/usecase"
 )
 
@@ -15,7 +16,9 @@ type userController struct {
 
 // UserController ..
 type UserController interface {
-	GetUsers(c Context) error
+	AddUser(c Context)
+	GetUsers(c Context)
+	UserById(c Context)
 }
 
 // NewUserController ..
@@ -23,16 +26,55 @@ func NewUserController(us usecase.UserInteractor) UserController {
 	return &userController{us}
 }
 
-func (uc *userController) GetUsers(c Context) error {
+// AddUser ...
+func (ctrl *userController) AddUser(c Context) {
+	data := model.User{}
+
+	// dump obj
+	// spew.Dump(data)
+
+	if err := c.BindJSON(&data); err != nil {
+		c.String(500, "Bad request: "+err.Error())
+	}
+
+	user, err := ctrl.usecase.AddUser(data)
+
+	// if err := ctrl.usecase.AddUser(data); err != nil {
+	// 	c.JSON(409, err)
+	// }
+	if err != nil {
+		c.JSON(400, err)
+		return
+	}
+
+	c.JSON(201, user)
+}
+
+// GetUsers ...
+func (uc *userController) GetUsers(c Context) {
 	// var u []*model.User
 
 	u, err := uc.usecase.GetAll()
 	// u, err := uc.userInteractor.Get(u)
 	if err != nil {
-		return err
+		c.JSON(404, err)
+		return
 	}
 
-	// res := Response{Message: u}
+	c.JSON(200, u)
+	// return c.JSON(200, u)
+}
 
-	return c.JSON(http.StatusOK, u)
+// UserById ...
+func (uc *userController) UserById(c Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	u, err := uc.usecase.UserById(id)
+
+	if err != nil {
+		c.JSON(400, err)
+		return
+	}
+
+	c.JSON(200, u)
+
 }

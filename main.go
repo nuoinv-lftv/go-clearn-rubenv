@@ -1,11 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/labstack/echo"
 
 	"github.com/nuoinguyen/gin-rubenv/config"
 	"github.com/nuoinguyen/gin-rubenv/infrastructure/datastore"
@@ -24,15 +20,20 @@ func main() {
 
 	ctrl := r.NewAppController()
 
-	e := echo.New()
+	// e := echo.New()
 
 	// debug mode
-	e.Debug = true
+	// e.Debug = true
 
-	e = router.NewRouter(e, ctrl)
+	e := router.NewRouting()
+	// e = router.NewRouting()
+	e.NewRouter(ctrl)
 
-	fmt.Println("Server listen at http://localhost" + ":" + config.C.Server.Address)
-	if err := e.Start(":" + config.C.Server.Address); err != nil {
-		log.Fatalln(err)
-	}
+	// e.Debug = true
+
+	e.Run(":8080")
+	// fmt.Println("Server listen at http://localhost" + ":" + config.C.Server.Address)
+	// if err := e.Start(":" + config.C.Server.Address); err != nil {
+	// 	log.Fatalln(err)
+	// }
 }

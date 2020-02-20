@@ -4,7 +4,6 @@ import (
 	"github.com/nuoinguyen/gin-rubenv/interface/controller"
 	"github.com/nuoinguyen/gin-rubenv/usecase"
 
-	ip "github.com/nuoinguyen/gin-rubenv/interface/presenter"
 	ir "github.com/nuoinguyen/gin-rubenv/interface/repository"
 	// ur "github.com/nuoinguyen/gin-rubenv/usecase/repository"
 	// up "github.com/nuoinguyen/gin-rubenv/usecase/presenter"
@@ -23,6 +22,6 @@ func (r *registry) NewUserRepository() ir.UserRepository {
 	return ir.NewUserRepository(r.db)
 }
 
-func (r *registry) NewUserPresenter() usecase.UserPresenter {
-	return ip.NewUserPresenter()
-}
+// func (r *registry) NewUserPresenter() usecase.UserPresenter {
+// 	return ip.NewUserPresenter()
+// }
