@@ -31,7 +31,6 @@ func (repo *userRepository) FindAll() (users []*model.User, err error) {
 }
 
 func (repo *userRepository) Store(data model.User) (user model.User, err error) {
-	// fmt.Println(data)
 	// user = model.User{}
 	repo.db.NewRecord(data)
 	repo.db.Create(&data)

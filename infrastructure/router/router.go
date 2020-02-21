@@ -39,17 +39,13 @@ func NewRouting() Routing {
 
 // NewRouter ..
 func (r *routing) NewRouter(ctrl controller.UserController) {
+	r.Gin.Static("/static", "./static")
+
 	u := r.Gin.Group("/api/v1/user")
 	{
-		// Create
-		u.POST("/register", func(c *gin.Context) {
-			ctrl.AddUser(c)
-		})
-		// Read
+		u.POST("/register", func(c *gin.Context) { ctrl.AddUser(c) })
 		u.GET("/get", func(c *gin.Context) { ctrl.GetUsers(c) })
 		u.GET("/get/:id", func(c *gin.Context) { ctrl.UserById(c) })
-		// Update (skip)
-		// Delete (skip)
 	}
 }
 
